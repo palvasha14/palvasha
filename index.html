@@ -6,27 +6,32 @@
 
 </head>
 <body>
-<h1>Login</h1>
-<form id="login-form">
-<label>Username</label>
-<input type="text" id="login-user"><br>
-<label>Password</label>
-<input type="text" id="login-pass"><br>
-<button type="submit">Login</button>
-</form>
-<p id='login-status'></p>
-<div class="hidden">
-<h1>Register</h1>
-<form id="reg-form">
-<label>Username</label>
-<input type="text" id="reg-user"><br>
-<label>Password</label>
-<input type="text" id="reg-pass"><br>
-<button type="submit">Register</button>
-</form>
-<p id='reg-status'></p>
-</div>
-	<div class="hidden">
+
+<div id="login-section" class="hidden">
+        <h1>Login</h1>
+        <form onsubmit="return login">
+            <input type="text" id="username" placeholder="Username" required><br>
+            <input type="password" id="password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="#" onclick="showRegistration()">Register here</a></p>
+    </div>
+
+
+	<div id="registration-section" class="hidden">
+        <h1>Register</h1>
+
+        <form onsubmit="return register()">
+            <input type="text" id="regUsername" placeholder="Username" required><br>
+            <input type="password" id="regPassword" placeholder="Password" required><br>
+            <input type="date" id="regDate" placeholder="Date" required><br>
+            <input type="email" id="regEmail" placeholder="email" required><br>
+            <button type="submit">Register</button>
+        </form>
+
+        <p>Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
+    </div>
+	<div id="main-section" class="hidden">
         <h1>Shopping Cart</h1>
 
 	<div class="products">
@@ -79,68 +84,8 @@
         </div>
     </div>
 
-<script>
-	const user=[
-{username:"user1", password:"pass1"},
-{username:"user2", password:"pass2"},
-];
-document.getElementById('login-form').addEventListener('submit',function(e){e.preventDefault();
-const username=document.getElementById('login-user').value;
-const password=document.getElementById('login-pass').value;
-const users=user.find(u => u.username===username && u.password===password);
-if(users)
-{
-document.getElementById('login-status').textContent='Login Sucessful';
-}
-else
-{
-document.getElementById('login-status').textContent='Invaild Credentials!';
-}
-});
-document.getElementById('reg-form').addEventListener('submit',function(e){e.preventDefault();
-const regUsername=document.getElementById('reg-user').value;
-const regPassword=document.getElementById('reg-pass').value;
-if(regUsername==='' || regPassword===''){ document.getElementById('reg-status').textContent="Please fill the both Fields!"
-}
-else
-{
-user.push({Username: regUsername,Password:regPassword});
-document.getElementById('reg-status').textContent='Registration Successful !'
-}
-});
-    let cartItems = [];
-
-function addToCart(product, price) {
-    cartItems.push({product, price});
-    updateCart();
-}
-
-function updateCart() {
-    let cartList = document.getElementById("cart-items");
-    let totalElement = document.getElementById("total");
-    let total = 0;
-
-    cartList.innerHTML = "";
-    cartItems.forEach(item => {
-        let listItem = document.createElement("li");
-        listItem.innerText = `${item.product} - $${item.price}`;
-        cartList.appendChild(listItem);
-        total += item.price;
-    });
-
-    totalElement.innerText = total;
-}
-
-
-
-
-// Add product and cart logic similar to the previous example
-
-function checksout() {
-    alert('Thank you for your purchase!');
-}
-
-</script>
+<script src="script1.js">
+  </script>
 
 </body>
 </html>
